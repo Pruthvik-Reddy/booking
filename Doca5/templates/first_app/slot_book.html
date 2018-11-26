@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <title>Your Appointments</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'first_app/css/bootstrap.css' %}">
+    <link rel="styleaheet" href="{% static 'first_app/css/style.css' %}">
+    <title>Book Your Slots</title>
+</head>
+<body>
+    <div class="container" >
+ <br/>
+ <div class="row">
+     <div class="col-lg-4">
+         <h1>Slots</h1>
+     </div>
+ </div>
+
+    <div class="row" >
+
+        {% if details1 %}
+            <div class="col-lg-4">
+         <h1>Choose a Slot</h1>
+            </div>
+
+            {% for detail in details1 %}
+        <div class="class1 col-lg-4">
+            <br />
+            <form>
+            {% csrf_token %}
+            <h2>{{ detail.doc_name}}</h2>
+            <input type="hidden" name="doc_name" value="{{ detail.doc_name }}">
+            <h4>{{ detail.date }}</h4>
+            <input type="hidden" name="date" value="{{ detail.date }}">
+                <h5>{{ detail.start_time }}</h5>
+            <input type="hidden" name="start_time" value="{{ detail.start_time }}">
+
+
+            <button onclick="location.href='{% url 'bookapp' %}'"   class="btn btn-success">Book</button>
+            </form>
+        </div>
+            {% endfor %}
+    </div>
+    {% else %}
+        <p>Doctor Not Available</p>
+    {% endif %}
+ </div>
+<div class="col-lg-8">
+     <button onclick="location.href='{% url 'book' %}'" type="button" class="btn btn-success">Go Back</button>
+ </div>
+
+
+</body>
+</html>
